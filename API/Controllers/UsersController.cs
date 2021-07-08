@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
+    
     [Route("api/[controller]")]
 
     [ApiController]
@@ -19,6 +20,13 @@ namespace API.Controllers
             _context = context;
         }
 
+        
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers(){
+            return await _context.Users.ToListAsync();
+            
+        }
+
         //api/users/3
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id){
@@ -26,10 +34,6 @@ namespace API.Controllers
             
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUser(){
-            return await _context.Users.ToListAsync();
-            
-        }
+       
     }
 }
