@@ -32,7 +32,7 @@ namespace API
             
         }
 
-        // public IConfiguration Configuration { get; }
+         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -41,10 +41,10 @@ namespace API
             services.AddControllers();
             services.AddCors();
             services.AddIdentityServices(_config);
-            // services.AddSwaggerGen(c =>
-            // {
-            //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
-            // });
+             services.AddSwaggerGen(c =>
+            {
+                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+             });
             
         }
 

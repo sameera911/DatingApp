@@ -24,9 +24,9 @@ const routes: Routes = [
       
     ]
   },
-  {path:'errors',component:TestErrorsComponent,pathMatch:'full'},
-  {path:'not-found',component:NotFoundComponent,pathMatch:'full'},
-  {path:'server-error',component:ServerErrorComponent,pathMatch:'full'},
+  {path:'errors',component:TestErrorsComponent},
+  {path:'not-found',component:NotFoundComponent},
+  {path:'server-error',component:ServerErrorComponent},
   {path:'**',component:NotFoundComponent,pathMatch:'full'},
 ];
 

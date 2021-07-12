@@ -6,15 +6,12 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { Router, NavigationExtras } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { catchError } from 'rxjs/operators';
-
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-
-  constructor(private router: Router, private toastr: ToastrService) {}
-
+  constructor(private router: Router, private toastr: ToastrService) { }
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError(error => {
@@ -29,24 +26,22 @@ export class ErrorInterceptor implements HttpInterceptor {
                   }
                 }
                 throw modalStateErrors.flat();
-              } else if (typeof(error.error) === 'object') {
-                this.toastr.error(error.statusText, error.status);
               } else {
-                this.toastr.error(error.error, error.status);
+                this.toastr.error(error.statusText === "OK" ? "BadRequest" : error.statusText, error.status);
               }
               break;
             case 401:
-              this.toastr.error(error.statusText, error.status);
+              this.toastr.error(error.statusText === "OK" ? "Unauthorized" : error.statusText, error.status);
               break;
             case 404:
               this.router.navigateByUrl('/not-found');
               break;
             case 500:
-              const navigationExtras: NavigationExtras = {state: {error: error.error}}
+              const navigationExtras: NavigationExtras = { state: { error: error.error } };
               this.router.navigateByUrl('/server-error', navigationExtras);
               break;
             default:
-              this.toastr.error('Something unexpected went wrong');
+              this.toastr.error('something expected went wrong');
               console.log(error);
               break;
           }
