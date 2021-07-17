@@ -10,46 +10,46 @@ import { MembersService } from 'src/app/_services/members.service';
   styleUrls: ['./member-detail.component.css']
 })
 export class MemberDetailComponent implements OnInit {
-
-  member: Member;
-  galleryOptions: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
-  constructor(private memberService: MembersService, private route: ActivatedRoute) { }
+ member: Member[] | any;
+ galleryOptions: NgxGalleryOptions[] = [];
+ galleryImages: NgxGalleryImage[] = [];
+  constructor(private memberService : MembersService, private route : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.loadMember();
-
     this.galleryOptions = [
-      {
-        width: '500px',
-        height: "500px",
-        imagePercent: 100,
-        thumbnailsColumns: 4,
-        imageAnimation: NgxGalleryAnimation.Slide,
-        preview: false
-      }
-    ]
-    //this.galleryImages=this.getImages();
+     {
+      width: '500px',
+      height: '500px',
+      imagePercent: 100,
+      thumbnailsColumns: 4,
+      imageAnimation: NgxGalleryAnimation.Slide,
+      preview: false
+    }
+  ]
+  //this.galleryImages = this.getImages();
   }
-
   getImages(): NgxGalleryImage[] {
     const imageUrls = [];
+    //console.log(this.member.photos);
+  // console.log("haaaaaiaiaiaiia");
+   
+    
     for (const photo of this.member.photos) {
       imageUrls.push({
         small: photo?.url,
-        meduim: photo?.url,
+        medium: photo?.url,
         big: photo?.url
       })
     }
     return imageUrls;
   }
 
-  loadMember() {
-    this.memberService.getMember(this.route.snapshot.paramMap.get('username'))
-      .subscribe(member => {
-        this.member = member;
-        this.galleryImages=this.getImages();
-      })
+  loadMember(){
+    this.memberService.getMember(this.route.snapshot.paramMap.get('username')||'').subscribe(member =>{
+      this.member = member;
+      this.galleryImages = this.getImages();
+    } )
   }
 
 }

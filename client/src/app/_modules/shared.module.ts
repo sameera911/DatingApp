@@ -4,6 +4,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -20,8 +21,9 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
   exports:[
     BsDropdownModule,
     ToastrModule,
-    TabsModule
-
+    TabsModule,
+    NgxGalleryModule,
+    HttpClientModule
   ]
 })
 export class SharedModule { }
