@@ -12,6 +12,12 @@ namespace API.Data.Migrations
                 table: "Users",
                 newName: "PasswordSalt");
 
+                 migrationBuilder.AddColumn<string>(
+                name: "City",
+                table: "Users",
+                type: "TEXT",
+                nullable: true);
+
             migrationBuilder.AddColumn<string>(
                 name: "Country",
                 table: "Users",
@@ -101,6 +107,10 @@ namespace API.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Photos");
+
+                migrationBuilder.DropColumn(
+                name: "City",
+                table: "Users");
 
             migrationBuilder.DropColumn(
                 name: "Country",
