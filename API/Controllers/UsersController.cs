@@ -31,7 +31,7 @@ namespace API.Controllers
 
             }
 
-
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
@@ -55,6 +55,7 @@ namespace API.Controllers
 
 
         //api/users/3
+        
         [HttpGet("{username}",Name="GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
@@ -97,7 +98,7 @@ namespace API.Controllers
             user.Photos.Add(photo);
             if(await _userRepository.SaveAllAsync())
             {
-            return CreatedAtRoute("GEtUser",new{Username=user.UserName}, _mapper.Map<PhotoDto>(photo));
+            return CreatedAtRoute("GetUser",new{Username=user.UserName}, _mapper.Map<PhotoDto>(photo));
 
             }
                
